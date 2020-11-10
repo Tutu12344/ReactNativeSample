@@ -1,21 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import MemoListScreen from './src/screens/MemoListScreen';
+import Appbar from './src/components/Appbar';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFDF6',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 80,
   },
 });
+const App = () => (
+  <View style={styles.container}>
+    <Appbar />
+
+    <MemoListScreen />
+  </View>
+);
+
+export default App;
