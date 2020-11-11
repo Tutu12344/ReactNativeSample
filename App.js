@@ -1,24 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import MemoListScreen from './src/screens/MemoListScreen';
-import Appbar from './src/components/Appbar';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import MemoListScreen from "./src/screens/MemoListScreen";
+import Appbar from "./src/components/Appbar";
+import MemoDetailScreen from "./src/screens/MemoDetailScreen";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFDF6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 80,
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#FFFDF6",
+		alignItems: "center",
+		justifyContent: "center",
+		paddingTop: 80,
+	},
 });
 const App = () => (
-  <View style={styles.container}>
-    <Appbar />
+	<View style={styles.container}>
+		<Appbar />
 
-    <MemoListScreen />
-  </View>
+		{/* <MemoListScreen /> */}
+		<MemoDetailScreen />
+	</View>
 );
 
 export default App;
