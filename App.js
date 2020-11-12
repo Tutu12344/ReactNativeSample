@@ -1,6 +1,6 @@
-import { StatusBar } from "expo-status-bar";
+import {StatusBar} from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import MemoListScreen from "./src/screens/MemoListScreen";
 import Appbar from "./src/components/Appbar";
 import MemoDetailScreen from "./src/screens/MemoDetailScreen";
