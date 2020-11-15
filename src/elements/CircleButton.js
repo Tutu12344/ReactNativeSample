@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, TouchableHighlight, View} from "react-native";
 import * as Font from "expo-font";
 import {createIconSet} from "@expo/vector-icons";
 
 import fontAwsome from "../../assets/fonts/fa-solid-900.ttf";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const CustomIcon = createIconSet(
 	{
@@ -11,14 +12,18 @@ const CustomIcon = createIconSet(
 		plus: "\uf067",
 		check: "\uf00c",
 	},
-	"FontAwsome",
+	"FontAwesome",
 );
 
 const styles = StyleSheet.create({
-	CircleButton: {
+	container: {
 		position: "absolute",
 		bottom: 32,
 		right: 32,
+		width: 48,
+		height: 48,
+	},
+	CircleButton: {
 		width: 48,
 		height: 48,
 		borderRadius: 24,
@@ -31,14 +36,14 @@ const styles = StyleSheet.create({
 		zIndex: 10,
 	},
 	CircleButtonTitle: {
-		fontFamily: "FontAwsome",
+		// fontFamily: "FontAwesome",
 		lineHeight: 32,
 		fontSize: 24,
 	},
 });
 
 const CircleButton = (data) => {
-	const {style, color, name} = data;
+	const {style, color, name, onPress} = data;
 	const [fontLoaded, setFontLoaded] = useState(false);
 	let bgColor = "#E31676";
 	let textColor = "#fff";
@@ -46,24 +51,33 @@ const CircleButton = (data) => {
 		bgColor = "#fff";
 		textColor = "#E31676";
 	}
-	useEffect(() => {
-		const fn = async () => {
-			await Font.loadAsync({
-				FontAwsome: fontAwsome,
-			});
-		};
-		fn();
-		setFontLoaded(true);
-	}, []);
+	// useEffect(() => {
+	// 	const fn = async () => {
+	// 		await Font.loadAsync({
+	// 			FontAwesome: fontAwsome,
+	// 		});
+	// 	};
+	// 	fn();
+	// 	setFontLoaded(true);
+	// }, [fontLoaded]);
 	return (
-		<View style={[styles.CircleButton, style, {backgroundColor: bgColor}]}>
-			{fontLoaded ? (
-				<CustomIcon
+		<TouchableHighlight
+			style={[styles.container, style]}
+			onPress={onPress}
+			underlayColor="transparent">
+			<View style={[styles.CircleButton, {backgroundColor: bgColor}]}>
+				{/* {fontLoaded ? (
+					<CustomIcon
+						name={name}
+						style={[styles.CircleButtonTitle, {color: textColor}]}
+					/>
+				) : null} */}
+				<Icon
 					name={name}
 					style={[styles.CircleButtonTitle, {color: textColor}]}
 				/>
-			) : null}
-		</View>
+			</View>
+		</TouchableHighlight>
 	);
 };
 

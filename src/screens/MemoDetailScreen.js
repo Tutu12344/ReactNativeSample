@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const MemoDetailScreen = () => (
+const MemoDetailScreen = (data) => (
 	<View style={styles.container}>
 		<View style={styles.memoHeader}>
 			<Text style={styles.memoHeaderTitle}>講座のアイデア</Text>
@@ -45,7 +45,14 @@ const MemoDetailScreen = () => (
 		<View style={styles.memoContent}>
 			<Text>講座のアイデアです</Text>
 		</View>
-		<CircleButton style={styles.editButton} color="white" name="pencil" />
+		<CircleButton
+			style={styles.editButton}
+			color="white"
+			name="pencil"
+			onPress={() => {
+				data.navigation.navigate("MemoEdit");
+			}}
+		/>
 	</View>
 );
 

@@ -10,10 +10,15 @@ const styles = StyleSheet.create({
 	},
 });
 
-const MemoListScreen = () => (
+const MemoListScreen = (data) => (
 	<View style={styles.container}>
-		<MemoList />
-		<CircleButton name="plus" />
+		<MemoList navigation={data.navigation} />
+		<CircleButton
+			name="plus"
+			onPress={() => {
+				data.navigation.navigate("MemoEdit");
+			}}
+		/>
 	</View>
 );
 

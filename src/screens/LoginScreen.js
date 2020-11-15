@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const LoginScreen = () => {
+const LoginScreen = (data) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>ログイン</Text>
@@ -50,7 +50,9 @@ const LoginScreen = () => {
 			<TextInput style={styles.input} value="Password" />
 			<TouchableHighlight
 				style={styles.button}
-				onPress={() => {}}
+				onPress={() => {
+					data.navigation.navigate("Home");
+				}}
 				underlayColor="#C70F66">
 				<Text style={styles.buttonTitle}>ログインする</Text>
 			</TouchableHighlight>

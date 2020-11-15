@@ -18,11 +18,16 @@ const styles = StyleSheet.create({
 	},
 });
 
-const MemoEditScreen = () => {
+const MemoEditScreen = (data) => {
 	return (
 		<View style={styles.container}>
 			<TextInput style={styles.memoEditInput} value="Hi" multiline />
-			<CircleButton name="check" />
+			<CircleButton
+				name="check"
+				onPress={() => {
+					data.navigation.goBack();
+				}}
+			/>
 		</View>
 	);
 };
