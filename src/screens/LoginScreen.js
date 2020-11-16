@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import firebase from "firebase";
 import {
 	StyleSheet,
 	View,
@@ -43,16 +44,47 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = (data) => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const handleSubmit = () => {
+		const firebaseConfig = {
+			apiKey: "AIzaSyBpamZsA8ZWdFQBdJlul0uCy8Zpz0ilh20",
+			authDomain: "react-native-todo-2bfca.firebaseapp.com",
+			databaseURL: "https://react-native-todo-2bfca.firebaseio.com",
+			projectId: "react-native-todo-2bfca",
+			storageBucket: "react-native-todo-2bfca.appspot.com",
+			messagingSenderId: "55302893030",
+			appId: "1:55302893030:web:871964c232cfa741963a27",
+		};
+		firebase.initializeApp(firebaseConfig);
+	};
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>ログイン</Text>
-			<TextInput style={styles.input} value="Email Address" />
-			<TextInput style={styles.input} value="Password" />
+			<TextInput
+				style={styles.input}
+				value={email}
+				onChange={(text) => {
+					setEmail(text.target.value);
+				}}
+				autoCapitalize="none"
+				autoCorrect={false}
+				placeholder="Email Address"
+			/>
+			<TextInput
+				style={styles.input}
+				value={password}
+				onChange={(text) => {
+					setPassword(text.target.value);
+				}}
+				autoCapitalize="none"
+				autoCorrect={false}
+				placeholder="Password"
+				secureTextEntry
+			/>
 			<TouchableHighlight
 				style={styles.button}
-				onPress={() => {
-					data.navigation.navigate("Home");
-				}}
+				onPress={handleSubmit}
 				underlayColor="#C70F66">
 				<Text style={styles.buttonTitle}>ログインする</Text>
 			</TouchableHighlight>
