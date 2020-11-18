@@ -5,12 +5,16 @@ import MemoListScreen from "./src/screens/MemoListScreen";
 import Appbar from "./src/components/Appbar";
 import MemoDetailScreen from "./src/screens/MemoDetailScreen";
 import MemoEditScreen from "./src/screens/MemoEditScreen";
+import MemoCreateScreen from "./src/screens/MemoCreateScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import firebase from "firebase";
 import ENV from "./env.json";
+
+// eslint-disable-next-line no-undef
+require("firebase/firestore");
 
 const firebaseConfig = {
 	apiKey: ENV.FIREBASE_API_KEY,
@@ -21,8 +25,10 @@ const firebaseConfig = {
 	messagingSenderId: ENV.FIREBASE_SENDER_ID,
 	appId: ENV.FIREBASE_APP_ID,
 };
-firebase.initializeApp(firebaseConfig);
-
+// firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+	firebase.initializeApp(firebaseConfig);
+}
 const Stack = createStackNavigator();
 
 function RootStack() {
@@ -42,6 +48,7 @@ function RootStack() {
 			<Stack.Screen name="Home" component={MemoListScreen} />
 			<Stack.Screen name="MemoDetail" component={MemoDetailScreen} />
 			<Stack.Screen name="MemoEdit" component={MemoEditScreen} />
+			<Stack.Screen name="MemoCreate" component={MemoCreateScreen} />
 			<Stack.Screen name="SignUp" component={SignUpScreen} />
 		</Stack.Navigator>
 	);

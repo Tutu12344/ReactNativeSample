@@ -47,16 +47,18 @@ const LoginScreen = (data) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const handleSubmit = () => {
-		const firebaseConfig = {
-			apiKey: "AIzaSyBpamZsA8ZWdFQBdJlul0uCy8Zpz0ilh20",
-			authDomain: "react-native-todo-2bfca.firebaseapp.com",
-			databaseURL: "https://react-native-todo-2bfca.firebaseio.com",
-			projectId: "react-native-todo-2bfca",
-			storageBucket: "react-native-todo-2bfca.appspot.com",
-			messagingSenderId: "55302893030",
-			appId: "1:55302893030:web:871964c232cfa741963a27",
-		};
-		firebase.initializeApp(firebaseConfig);
+		firebase
+			.auth()
+			.signInWithEmailAndPassword(email, password)
+			.then((result) => {
+				console.log("success", result.user);
+				data.navigation.navigate("Home", {currentUser: result.user});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		// console.log("a", email);
+		// console.log(password);
 	};
 	return (
 		<View style={styles.container}>
@@ -64,9 +66,7 @@ const LoginScreen = (data) => {
 			<TextInput
 				style={styles.input}
 				value={email}
-				onChange={(text) => {
-					setEmail(text.target.value);
-				}}
+				onChangeText={(text) => setEmail(text)}
 				autoCapitalize="none"
 				autoCorrect={false}
 				placeholder="Email Address"
@@ -74,9 +74,7 @@ const LoginScreen = (data) => {
 			<TextInput
 				style={styles.input}
 				value={password}
-				onChange={(text) => {
-					setPassword(text.target.value);
-				}}
+				onChangeText={(text) => setPassword(text)}
 				autoCapitalize="none"
 				autoCorrect={false}
 				placeholder="Password"
