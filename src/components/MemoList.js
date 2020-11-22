@@ -1,5 +1,6 @@
 import React from "react";
 import {StyleSheet, View, Text, TouchableHighlight} from "react-native";
+import {FlatList} from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
 	memoList: {
@@ -24,23 +25,28 @@ const styles = StyleSheet.create({
 
 const MemoList = (data) => {
 	const list = [];
-	const renderMemo = (memo) => {
+	const renderMemo = ({item}) => {
 		return (
 			<TouchableHighlight
 				onPress={() => {
 					data.navigation.navigate("MemoDetail");
 				}}>
 				<View style={styles.memoListItem}>
-					<Text style={styles.memoTitle}>{memo.body}</Text>
+					<Text style={styles.memoTitle}>{item.body}</Text>
 					<Text style={styles.memoDate}>2017/10/10</Text>
+					{console.log(item)}
 				</View>
 			</TouchableHighlight>
 		);
 	};
-	data.memoList.forEach((memo) => {
-		list.push(renderMemo(memo));
-	});
-	return <View style={styles.memoList}>{list}</View>;
+	// data.memoList.forEach((memo) => {
+	// 	list.push(renderMemo(memo));
+	// });
+	return (
+		<View style={styles.memoList}>
+			<FlatList data={data.memoList} renderItem={renderMemo}></FlatList>
+		</View>
+	);
 };
 
 export default MemoList;

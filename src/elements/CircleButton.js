@@ -52,14 +52,16 @@ const CircleButton = (data) => {
 		textColor = "#E31676";
 	}
 	// useEffect(() => {
-	// 	const fn = async () => {
-	// 		await Font.loadAsync({
-	// 			FontAwesome: fontAwsome,
-	// 		});
-	// 	};
-	// 	fn();
-	// 	setFontLoaded(true);
-	// }, [fontLoaded]);
+	// 	// const fn = async () => {
+	// 	// 	await Font.loadAsync({
+	// 	// 		FontAwesome: fontAwsome,
+	// 	// 	});
+	// 	// };
+	// 	// fn();
+	// 	// setFontLoaded(true);
+
+	// 	const {currentUser} = firebase.auth();
+	// });
 	return (
 		<TouchableHighlight
 			style={[styles.container, style]}

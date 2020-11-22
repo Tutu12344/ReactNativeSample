@@ -22,7 +22,7 @@ const MemoListScreen = (data) => {
 				const tempList = [];
 				querySnapshot.forEach((doc) => {
 					// console.log(doc);
-					tempList.push(doc.data());
+					tempList.push({...doc.data(), key: doc.id});
 				});
 				setMemoList(tempList);
 			})
