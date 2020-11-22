@@ -52,7 +52,7 @@ const LoginScreen = (data) => {
 			.signInWithEmailAndPassword(email, password)
 			.then((result) => {
 				console.log("success", result.user);
-				data.navigation.navigate("Home", {currentUser: result.user});
+				data.navigation.navigate("Home");
 			})
 			.catch((error) => {
 				console.log(error);

@@ -22,7 +22,8 @@ const MemoEditScreen = (data) => {
 	const [body, setBody] = useState("");
 	const handlePress = () => {
 		const db = firebase.firestore();
-		const currentUser = data.route.params.currentUser;
+		// const currentUser = data.route.params.currentUser;
+		const {currentUser} = firebase.auth();
 		db.collection(`users/${currentUser.uid}/memos`)
 			.add({
 				body: body,

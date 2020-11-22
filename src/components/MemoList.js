@@ -22,28 +22,25 @@ const styles = StyleSheet.create({
 	},
 });
 
-const MemoList = (data) => (
-	<View style={styles.memoList}>
-		<TouchableHighlight
-			onPress={() => {
-				data.navigation.navigate("MemoDetail");
-			}}>
-			<View style={styles.memoListItem}>
-				<Text style={styles.memoTitle}>講座のアイテム</Text>
-				<Text style={styles.memoDate}>2017/10/10</Text>
-			</View>
-		</TouchableHighlight>
-
-		<TouchableHighlight
-			onPress={() => {
-				data.navigation.navigate("MemoDetail");
-			}}>
-			<View style={styles.memoListItem}>
-				<Text style={styles.memoTitle}>講座のアイテム</Text>
-				<Text style={styles.memoDate}>2017/10/10</Text>
-			</View>
-		</TouchableHighlight>
-	</View>
-);
+const MemoList = (data) => {
+	const list = [];
+	const renderMemo = (memo) => {
+		return (
+			<TouchableHighlight
+				onPress={() => {
+					data.navigation.navigate("MemoDetail");
+				}}>
+				<View style={styles.memoListItem}>
+					<Text style={styles.memoTitle}>{memo.body}</Text>
+					<Text style={styles.memoDate}>2017/10/10</Text>
+				</View>
+			</TouchableHighlight>
+		);
+	};
+	data.memoList.forEach((memo) => {
+		list.push(renderMemo(memo));
+	});
+	return <View style={styles.memoList}>{list}</View>;
+};
 
 export default MemoList;
