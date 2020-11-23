@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const MemoEditScreen = (data) => {
+const MemoCreateScreen = (data) => {
 	const [body, setBody] = useState("");
 	const handlePress = () => {
 		const db = firebase.firestore();
@@ -27,7 +27,7 @@ const MemoEditScreen = (data) => {
 		db.collection(`users/${currentUser.uid}/memos`)
 			.add({
 				body: body,
-				createOn: new Date(),
+				createOn: firebase.firestore.FieldValue.serverTimestamp(),
 			})
 			.then((docRef) => {
 				console.log(docRef.id);
@@ -53,4 +53,4 @@ const MemoEditScreen = (data) => {
 	);
 };
 
-export default MemoEditScreen;
+export default MemoCreateScreen;
