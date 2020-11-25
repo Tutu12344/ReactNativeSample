@@ -15,7 +15,14 @@ const MemoListScreen = (data) => {
 	useEffect(() => {
 		const {currentUser} = firebase.auth();
 		const db = firebase.firestore();
-		db.collection(`users/${currentUser.uid}/memos`)
+		db.collection(`users/${currentUser.uid}/memos`).onSnapshot((snapshot) => {
+			const tempList = [];
+			snapshot.forEach((doc) => {
+				tempList.push({...doc.data(), key: doc.id});
+			});
+			setMemoList(tempList);
+		});
+		/*
 			.get()
 			.then((querySnapshot) => {
 				// console.log(querySnapshot);
@@ -28,7 +35,7 @@ const MemoListScreen = (data) => {
 			})
 			.catch((error) => {
 				console.log(error);
-			});
+			});*/
 		// console.log("will mount");
 	}, []);
 	const handlePress = () => {
