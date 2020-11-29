@@ -4,9 +4,11 @@ import {
 	StyleSheet,
 	View,
 	TouchableHighlight,
+	TouchableOpacity,
 	TextInput,
 	Text,
 } from "react-native";
+import {CommonActions} from "@react-navigation/native";
 
 const styles = StyleSheet.create({
 	container: {
@@ -41,6 +43,13 @@ const styles = StyleSheet.create({
 		color: "#fff",
 		fontSize: 18,
 	},
+	signup: {
+		marginTop: 16,
+		alignSelf: "center",
+	},
+	signupText: {
+		fontSize: 16,
+	},
 });
 
 const LoginScreen = (data) => {
@@ -53,12 +62,18 @@ const LoginScreen = (data) => {
 			.then((result) => {
 				console.log("success", result.user);
 				data.navigation.navigate("Home");
+				const resetAction = CommonActions.reset({
+					index: 0,
+					routes: [{name: "Home"}],
+				});
+				data.navigation.dispatch(resetAction);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-		// console.log("a", email);
-		// console.log(password);
+	};
+	const handlePress = () => {
+		data.navigation.navigate("SignUp");
 	};
 	return (
 		<View style={styles.container}>
@@ -86,6 +101,10 @@ const LoginScreen = (data) => {
 				underlayColor="#C70F66">
 				<Text style={styles.buttonTitle}>ログインする</Text>
 			</TouchableHighlight>
+
+			<TouchableOpacity style={styles.signup} onPress={handlePress}>
+				<Text style={styles.signupText}>メンバー登録する</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };

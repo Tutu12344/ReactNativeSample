@@ -52,12 +52,15 @@ const SignUpScreen = (data) => {
 			.then((result) => {
 				console.log("success", result.user);
 				data.navigation.navigate("Home");
+				const resetAction = CommonActions.reset({
+					index: 0,
+					routes: [{name: "Home"}],
+				});
+				data.navigation.dispatch(resetAction);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-		// console.log("a", email);
-		// console.log(password);
 	};
 	return (
 		<View style={styles.container}>

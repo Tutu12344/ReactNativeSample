@@ -24,10 +24,11 @@ const MemoCreateScreen = (data) => {
 		const db = firebase.firestore();
 		// const currentUser = data.route.params.currentUser;
 		const {currentUser} = firebase.auth();
+
 		db.collection(`users/${currentUser.uid}/memos`)
 			.add({
 				body: body,
-				createOn: firebase.firestore.FieldValue.serverTimestamp(),
+				createOn: new Date(),
 			})
 			.then((docRef) => {
 				console.log(docRef.id);
