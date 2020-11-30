@@ -55,6 +55,7 @@ const MemoEditScreen = (data) => {
 				style={styles.memoEditInput}
 				onChangeText={(text) => setMemo({...memo, body: text})}
 				value={memo.body}
+				textAlignVertical="top"
 				multiline
 			/>
 			<CircleButton name="check" onPress={handlePress} />

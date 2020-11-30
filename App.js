@@ -38,6 +38,7 @@ function RootStack() {
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: "#265366",
+					shadowOffset: {width: 0, height: 2},
 				},
 				headerTintColor: "#fff",
 				headerTitleStyle: {

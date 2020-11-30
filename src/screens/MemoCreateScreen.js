@@ -48,6 +48,7 @@ const MemoCreateScreen = (data) => {
 				placeholder="Todo"
 				autoCapitalize="none"
 				autoCorrect={false}
+				textAlignVertical="top"
 			/>
 			<CircleButton name="check" onPress={handlePress} />
 		</View>

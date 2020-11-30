@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react";
-import {StyleSheet, TouchableHighlight, View} from "react-native";
+import {StyleSheet, TouchableHighlight, View, Platform} from "react-native";
 import * as Font from "expo-font";
 import {createIconSet} from "@expo/vector-icons";
-
 import fontAwsome from "../../assets/fonts/fa-solid-900.ttf";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -18,8 +17,8 @@ const CustomIcon = createIconSet(
 const styles = StyleSheet.create({
 	container: {
 		position: "absolute",
-		bottom: 32,
-		right: 32,
+		bottom: 24,
+		right: 24,
 		width: 48,
 		height: 48,
 	},
@@ -34,6 +33,12 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.3,
 		shadowRadius: 3,
 		zIndex: 10,
+		...Platform.select({
+			android: {
+				margin: 8,
+				elevation: 4,
+			},
+		}),
 	},
 	CircleButtonTitle: {
 		// fontFamily: "FontAwesome",
@@ -44,7 +49,6 @@ const styles = StyleSheet.create({
 
 const CircleButton = (data) => {
 	const {style, color, name, onPress} = data;
-	const [fontLoaded, setFontLoaded] = useState(false);
 	let bgColor = "#E31676";
 	let textColor = "#fff";
 	if (color == "white") {
