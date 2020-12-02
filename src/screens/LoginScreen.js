@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import firebase from "firebase";
 import {
 	StyleSheet,
@@ -9,6 +9,8 @@ import {
 	Text,
 } from "react-native";
 import {CommonActions} from "@react-navigation/native";
+import * as SecureStore from "expo-secure-store";
+// import Expo from "expo";
 
 const styles = StyleSheet.create({
 	container: {
@@ -55,11 +57,35 @@ const styles = StyleSheet.create({
 const LoginScreen = (data) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	useEffect(() => {
+		const fn = async () => {
+			const email = await SecureStore.getItemAsync("email");
+			const password = await SecureStore.getItemAsync("password");
+			console.log(email);
+			firebase
+				.auth()
+				.signInWithEmailAndPassword(email, password)
+				.then(() => {
+					data.navigation.navigate("Home");
+					const resetAction = CommonActions.reset({
+						index: 0,
+						routes: [{name: "Home"}],
+					});
+					data.navigation.dispatch(resetAction);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		};
+		fn();
+	});
 	const handleSubmit = () => {
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password)
 			.then((result) => {
+				SecureStore.setItemAsync("email", email);
+				SecureStore.setItemAsync("password", password);
 				console.log("success", result.user);
 				data.navigation.navigate("Home");
 				const resetAction = CommonActions.reset({
